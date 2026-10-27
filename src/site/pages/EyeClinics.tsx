@@ -152,7 +152,7 @@ const EyeClinics = () => (
           <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground"><UserRound className="h-3.5 w-3.5" />Plus owner, admin, accountant and more — 9 roles in total.</p>
         </section>
 
-        <PricingEstimator included={included} pricingHref="/pricing" />
+        <PricingEstimator included={included} pricingHref="/industries/dental-clinics/pricing" />
 
         <ClosingBanner
           title="See it with your own patients"
