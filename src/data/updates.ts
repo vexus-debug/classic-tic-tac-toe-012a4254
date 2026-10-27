@@ -13,6 +13,15 @@ export interface UpdateEntry {
 
 export const updates: UpdateEntry[] = [
   {
+    version: "v2.2.7",
+    date: "October 27, 2026",
+    title: "Eye clinic page: feature grid, patient flow and cost estimator",
+    kind: "improvement",
+    items: [
+      { kind: "improvement", text: "The eye clinic page now shows key features with real screens, a five-step visit from check-in to new glasses, what each role does, the per-case cost estimator and a clearer WhatsApp and demo section." },
+    ],
+  },
+  {
     version: "v2.2.6",
     date: "October 27, 2026",
     title: "Dental page: capability checklist, cost estimator and new closing section",
