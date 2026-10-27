@@ -23,6 +23,13 @@ import shotBillingAsset from "@/assets/current-dashboard/dental-billing.png.asse
 import shotInventoryAsset from "@/assets/current-dashboard/dental-inventory.png.asset.json";
 import shotDashboardAsset from "@/assets/current-dashboard/dental-dashboard.png.asset.json";
 import { LocalSeo } from "@/site/components/LocalSeo";
+import { CapabilityMatrix, ClosingBanner, PricingEstimator, type CapabilityGroup } from "@/site/components/industry/IndustrySections";
+
+const matrixGroups: CapabilityGroup[] = [
+  { tab: "Clinical", icon: Smile, tag: "Clinical & Charting", title: "Chart by tooth, plan by patient", benefit: "Everything you record in the chair stays attached to the same patient.", points: ["Tooth-by-tooth charting", "Treatment plans", "SOAP notes", "Prescriptions", "Digital consent forms", "Tooth-tagged imaging"] },
+  { tab: "Admin", icon: CalendarClock, tag: "Front Desk & Scheduling", title: "A front desk that finally breathes", benefit: "Fewer no-shows, shorter waits, no double-booked chairs.", points: ["Chair & dentist booking", "Live waiting list", "Walk-in queue", "Invoices & estimates", "Payment plans"] },
+  { tab: "Operations", icon: Boxes, tag: "Back Office & Inventory", title: "Facts, not guesswork", benefit: "Stock, staff and money reconciled from the work itself.", points: ["Stock linked to treatments", "Suppliers & purchase orders", "Commissions & expenses", "Profit per treatment", "Audit trail"] },
+];
 
 const WHATSAPP = "https://wa.me/2349017758165?text=Hello%20I%20would%20like%20to%20know%20more%20about%20Clinexus";
 const shotPatients = shotPatientsAsset.url;
@@ -182,26 +189,13 @@ const DentalClinics = () => {
             </ol>
           </section>
 
-          <motion.h2 initial="hidden" whileInView="show" viewport={viewport} variants={reveal} className="mb-4 text-2xl font-bold text-foreground md:text-3xl">
-            The rest of the clinic, <span className="text-muted-foreground">already in there, not another product to buy</span>
-          </motion.h2>
-          <motion.p initial="hidden" whileInView="show" viewport={viewport} variants={reveal} className="mb-10 max-w-2xl text-muted-foreground">
-            Seeing patients is only half your job. You know the other half all too well: the money, the stock, the staff — and that patient who hasn't been back in a year, the one you keep meaning to call. It all lives in the same system, using the same records.
-          </motion.p>
-          <div className="mb-16 divide-y divide-border border-y border-border lg:mb-24">
-            {coreGroups.map((group) => (
-              <motion.div key={group.title} initial="hidden" whileInView="show" viewport={viewport} variants={reveal} className="grid gap-3 py-6 md:grid-cols-[220px_1fr] md:gap-8">
-                <div className="flex items-center gap-3 md:items-start">
-                  <group.icon className="h-4 w-4 shrink-0 text-primary md:mt-1" />
-                  <div>
-                    <h3 className="text-base font-semibold text-foreground">{group.title}</h3>
-                    <p className="mt-1 hidden text-xs leading-relaxed text-muted-foreground md:block">{group.benefit}</p>
-                  </div>
-                </div>
-                <ul className="grid gap-x-6 gap-y-2 sm:grid-cols-2">{group.points.map((point) => <li key={point} className="flex items-start gap-2 text-[13px] leading-snug text-muted-foreground"><span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" /><span>{point}</span></li>)}</ul>
-              </motion.div>
-            ))}
-          </div>
+          <CapabilityMatrix
+            kicker="The rest of the clinic"
+            title="Already in there,"
+            subtitle="not another product to buy"
+            intro="Seeing patients is only half your job. The money, the stock, the staff — it all lives in the same system, using the same records."
+            groups={matrixGroups}
+          />
 
           <div className="mb-16 grid gap-4 md:grid-cols-12 lg:mb-24">
             <motion.section initial="hidden" whileInView="show" viewport={viewport} variants={slide("left")} className="eye-panel col-span-12 min-w-0 rounded-2xl p-5 sm:rounded-3xl sm:p-8 md:col-span-7">
@@ -218,36 +212,14 @@ const DentalClinics = () => {
             </motion.section>
           </div>
 
-          <motion.section initial="hidden" whileInView="show" viewport={viewport} variants={reveal} className="eye-panel rounded-2xl p-5 text-center sm:rounded-[3rem] sm:p-8 md:p-12" style={{ borderColor: "hsl(var(--primary) / 0.3)" }}>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-primary">Getting started</p>
-            <h2 className="mb-4 text-3xl font-bold text-card-foreground">Simple pricing. Pay only when you see patients.</h2>
-            <p className="mx-auto mb-12 max-w-2xl text-muted-foreground">No monthly subscription and no tiers. Every feature is included. You pay a one-time setup fee, then a small fee for each patient case.</p>
-            <div className="mx-auto mb-12 grid max-w-3xl gap-6 text-left md:grid-cols-2">
-              <div className="rounded-2xl bg-background/50 p-6">
-                <p className="text-sm font-medium text-muted-foreground">One-time setup fee</p>
-                <p className="mt-2 text-3xl font-bold text-primary">₦30,000 – ₦100,000</p>
-                <p className="mt-3 text-sm text-muted-foreground">Depends on your clinic size. Paid once.</p>
-              </div>
-              <div className="eye-panel-accent rounded-2xl p-6">
-                <p className="text-sm font-medium opacity-80">Per patient case</p>
-                <p className="mt-2 text-3xl font-bold">₦1,000</p>
-                <p className="mt-3 text-sm opacity-80">Only for cases you actually handle.</p>
-              </div>
-            </div>
-            <div className="mx-auto max-w-2xl text-left"><p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Everything included</p><div className="grid gap-4 md:grid-cols-2">{included.map((item) => <div key={item} className="flex items-start gap-2 text-sm text-muted-foreground"><Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span>{item}</span></div>)}</div></div>
-            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link to="/industries/dental-clinics/pricing" className="inline-flex items-center justify-center gap-2 rounded-md border border-primary px-6 py-3 font-bold text-primary hover:bg-primary/10">See pricing</Link>
-              <Link to="/industries/dental-clinics/how-cases-work" className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 font-bold text-primary-foreground hover:bg-foreground">How the ₦1,000 per case works <ArrowRight className="h-4 w-4" /></Link>
-            </div>
-          </motion.section>
+          <PricingEstimator included={included} pricingHref="/industries/dental-clinics/pricing" casesHref="/industries/dental-clinics/how-cases-work" />
 
-          <motion.section initial="hidden" whileInView="show" viewport={viewport} variants={reveal} className="mt-24 text-center">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-primary">Next step</p>
-            <h2 className="mb-5 text-3xl font-bold text-foreground">See it with your own patients</h2>
-            <p className="mx-auto mb-10 max-w-2xl leading-relaxed text-muted-foreground">Tell us about your day — how your clinic handles booking, charting and billing, and the part that frustrates you most — and we'll show you Clinexus doing exactly that for your workflow, not a generic demo.</p>
-            <div className="flex w-full flex-col gap-4 sm:inline-flex sm:w-auto sm:flex-row"><a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-6 py-4 font-bold text-primary-foreground transition-colors hover:bg-foreground sm:w-auto sm:px-10"><MessageCircle className="h-5 w-5" />Talk to us on WhatsApp</a><Link to="/login" className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-primary px-6 py-4 font-bold text-primary transition-colors hover:bg-primary/10 sm:w-auto sm:px-10">See demo <ArrowRight className="h-5 w-5" /></Link></div>
-            <p className="mt-6 text-sm text-muted-foreground/60">Clinexus, clinic management for how your clinic really works.</p>
-          </motion.section>
+          <ClosingBanner
+            title="See it with your own patients"
+            body="Tell us how your clinic handles booking, charting and billing — and the part that frustrates you most — and we'll show you Clinexus doing exactly that, not a generic demo."
+            whatsapp={WHATSAPP}
+            trust={["Every feature included", "No monthly subscription", "Role-based access for 9 staff roles", "Audit trail on every change"]}
+          />
         </div>
       </div>
       <div className="mx-auto max-w-6xl px-4 pb-16 sm:px-6 lg:pb-24">
