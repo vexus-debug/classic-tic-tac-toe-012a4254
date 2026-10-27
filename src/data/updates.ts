@@ -13,6 +13,15 @@ export interface UpdateEntry {
 
 export const updates: UpdateEntry[] = [
   {
+    version: "v2.2.6",
+    date: "October 27, 2026",
+    title: "Dental page: capability checklist, cost estimator and new closing section",
+    kind: "improvement",
+    items: [
+      { kind: "improvement", text: "The dental clinic page groups capabilities into Clinical, Admin and Operations tabs you can tick off, adds a slider to estimate your monthly cost by case volume, and ends with a clearer WhatsApp and demo section." },
+    ],
+  },
+  {
     version: "v2.2.5",
     date: "October 27, 2026",
     title: "Refreshed dental clinic page",
